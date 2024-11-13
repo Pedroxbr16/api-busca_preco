@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Busca de Produtos</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <div class="container py-5">
+        <h1 class="text-center mb-4">Busca de Produtos no Mercado Livre</h1>
+        
+        <form method="POST" action="/" class="form-inline justify-content-center mb-5">
+            <div class="form-group col-md-6">
+                <label for="termo" class="sr-only">Produto:</label>
+                <input type="text" id="termo" name="termo" class="form-control form-control-lg w-100" placeholder="Digite o produto" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg ml-2">Buscar</button>
+        </form>
+        
+        
+        {% if produtos %}
+        <h2 class="text-center mb-4">Top 5 Produtos Mais Baratos</h2>
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Nome</th>
+                        <th>Preço</th>
+                        <th>Link</th>
+                        <th>Imagem</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for produto in produtos[:5] %}
+                    <tr>
+                        <td>{{ produto.nome }}</td>
+                        <td>R${{ produto.preco }}</td>
+                        <td><a href="{{ produto.link }}" target="_blank" class="btn btn-info btn-sm">Ver Produto</a></td>
+                        <td><img src="{{ produto.imagem }}" alt="Imagem do produto" class="img-thumbnail" style="width: 100px;"></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
